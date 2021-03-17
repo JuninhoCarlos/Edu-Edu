@@ -1,3 +1,30 @@
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   background-image: url(../../assets/login_bg.png);
+}
+
+.container {
+  border: 1px solid #e1e1e1;
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 0px #e3e3e3;
+  border-radius: 25px;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.esqueci-senha {
+  border: 1px solid #47cdff;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 0px #25abe6;
+  border-radius: 20px;
 }
