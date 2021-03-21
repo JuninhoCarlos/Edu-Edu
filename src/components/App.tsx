@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import { store } from "../app/store";
+import Dashboard from "./layout/Dashboard";
 
 //My components
 import Login from "./login/Login";
@@ -18,6 +19,7 @@ const App = (): JSX.Element => {
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </Provider>

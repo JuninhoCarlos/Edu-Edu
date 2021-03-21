@@ -1,30 +1,87 @@
-html {
-  height: 100%;
+* {
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
 }
 
-body {
-  height: 100%;
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+  width: 100vw;
   background-image: url(../../assets/login_bg.png);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
+.flex-container > p {
+  margin: 40px 0px 0px 0px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.875em;
+}
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0 34px;
   border: 1px solid #e1e1e1;
   background: #fff;
-  box-sizing: border-box;
+  width: 368px;
+  height: auto;
   box-shadow: 0px 4px 0px #e3e3e3;
   border-radius: 25px;
 }
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 20px;
+.form {
+  width: 100%;
+  margin-bottom: 39px;
 }
 
-.esqueci-senha {
+.relative {
+  position: relative;
+}
+
+.right-align {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  margin: 10px;
+  pointer-events: initial;
+}
+
+.icon {
+  width: 20px;
+  height: 16px;
+  color: #47cdff;
+}
+
+.container > img {
+  display: block;
+  width: 179px;
+  margin: 39px 0px;
+}
+
+.my-btn {
   border: 1px solid #47cdff;
   box-sizing: border-box;
   box-shadow: 0px 4px 0px #25abe6;
-  border-radius: 20px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.my-primary {
+  background-color: #47cdff;
+}
+
+.my-primary:hover {
+  background-color: #05b7fb;
 }
