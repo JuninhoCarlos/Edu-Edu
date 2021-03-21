@@ -26,6 +26,10 @@ const CadastroAluno = (): JSX.Element => {
               aria-describedby="emailHelp"            
             />
           </div>
+          <div>
+            <label htmlFor="customRange1" className="form-label">Example range</label>
+            <input type="range" className="form-range" min="0" max="5" id="customRange1"></input>
+          </div>
           <div className="w-50 mx-auto">
             <Link
               to="/dashboard"
