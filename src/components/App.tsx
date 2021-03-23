@@ -19,7 +19,7 @@ const App = (): JSX.Element => {
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
     </Provider>

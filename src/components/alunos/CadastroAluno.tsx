@@ -200,7 +200,7 @@ const CadastroAluno = (): JSX.Element => {
             </label>
           </div>
 
-          <div className="w-50 mx-auto">
+          <div className="w-50 mx-auto mt-3">
             <Link
               to="/dashboard"
               type="button"

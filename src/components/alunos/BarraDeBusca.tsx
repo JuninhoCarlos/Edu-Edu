@@ -1,0 +1,103 @@
+import React from "react";
+import { useState } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
+
+interface Filtro {
+  nome: Boolean;
+  ano: Boolean;
+}
+
+const BarraDeBusca = (): JSX.Element => {
+  const { url } = useRouteMatch();
+
+  const [filtrarPor, setFiltrarPor] = useState<Filtro>({
+    nome: false,
+    ano: true,
+  });
+
+  return (
+    <div className="p-2 ml-4 mb-3 mt-3 align-self-center w-75 bg-white my-border my-radius">
+      <div className="d-flex flex-row justify-content-between align-items-center">
+        <div className="input-group w-25 ml-3 mt-2 mb-2">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Pesquisar"
+            aria-label="Input group example"
+            aria-describedby="basic-addon1"
+          />
+          <div className="input-group-append ">
+            <span className="input-group-text" id="basic-addon1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-search"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"></path>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div className="btn-group btn-group-toggle ">
+          <label
+            className={`border btn my-font ${
+              filtrarPor.nome ? "my-primary-button" : "my-secondary-button"
+            }`}
+          >
+            <input
+              type="radio"
+              name="options"
+              id="option1"
+              autoComplete="off"
+              onClick={() => setFiltrarPor({ nome: true, ano: false })}
+            />
+            Nome
+          </label>
+          <label
+            className={`border btn my-font ${
+              filtrarPor.ano ? "my-primary-button" : "my-secondary-button"
+            }`}
+          >
+            <input
+              type="radio"
+              name="options"
+              id="option2"
+              autoComplete="off"
+              onClick={() => setFiltrarPor({ nome: false, ano: true })}
+            />
+            Ano
+          </label>
+        </div>
+
+        <div className="mr-3">
+          <Link
+            to={`${url}/cadastro`}
+            type="button"
+            className="btn my-primary-button my-font"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              className="bi bi-plus-circle my-font"
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>{" "}
+            <span style={{ position: "relative", top: "2px" }}>
+              Cadastrar Novo Aluno
+            </span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BarraDeBusca;
