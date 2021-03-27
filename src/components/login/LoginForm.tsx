@@ -1,33 +1,37 @@
 import React from "react";
 import { useState } from "react";
 import { Form, Field } from 'react-final-form'
+import { useDispatch } from "react-redux"
 
+import { login } from "../../reducers/authSlice"
 
 import logo from "../../assets/logo.png";
 import email from "../../assets/icons/icon_email.png";
 import eye from "../../assets/icons/eye.svg"
 import eye_slash from "../../assets/icons/eye-slash.svg"
 
-interface Login{
+export interface Login{
   email : string,
   password: string
 }
 
 const LoginForm = (): JSX.Element => {
+  /** Local state */
   const [seePassword, setSeePassword] = useState(false);
   
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  
-  const required = (value: string) => (value ? undefined : 'Este campo é requerido')
-  const mustBeAnEmail = (value: string) => (emailRegex.test(value.toLowerCase()) ? undefined : 'Digite um e-mail válido')
-
+  /** Validation form logic */ 
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;  
+  const required = (value: string) => (value ? undefined : 'Este campo é requerido!')
+  const mustBeAnEmail = (value: string) => (emailRegex.test(value.toLowerCase()) ? undefined : 'Digite um e-mail válido!')
   const composeValidators = (...validators: any) => (value: any) =>
     validators.reduce((error: any, validator: any) => error || validator(value), undefined)
 
+  /** Redux state management */
+  const dispatch = useDispatch();
 
-
-  const onSubmit = async (values: Login) => {
+  const onSubmit = async (values:Login) => {
     //e.preventDefault();
+    dispatch(login(values));
     console.log(values);
     console.log("on submit");
   }
