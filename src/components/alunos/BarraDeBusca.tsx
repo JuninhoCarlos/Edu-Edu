@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
+import "../login/login.css";
 
 interface Filtro {
   nome: Boolean;
@@ -18,7 +19,7 @@ const BarraDeBusca = (): JSX.Element => {
   return (
     <div className="py-2 my-3 align-self-center w-100 bg-white my-border my-radius">
       <div className="d-flex flex-row justify-content-between align-items-center">
-        <div className="input-group w-25 ml-3 mt-2 mb-2">
+        <div className="input-group input-group-lg w-25 ml-3 mt-2">
           <input
             type="text"
             className="form-control"
@@ -60,7 +61,7 @@ const BarraDeBusca = (): JSX.Element => {
               Nome
             </label>
             <label
-              className={`border btn my-font ${
+              className={`px-4 border btn my-font ${
                 filtrarPor.ano ? "my-primary-button" : "my-primary-text-color"
               }`}
             >
@@ -80,7 +81,8 @@ const BarraDeBusca = (): JSX.Element => {
           <Link
             to={`${url}/cadastro`}
             type="button"
-            className="btn my-primary-button my-font"
+            className="py-2 btn btn-primary text-white my-btn my-primary"
+            style={{ height: "auto" }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

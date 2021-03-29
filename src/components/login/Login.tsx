@@ -6,7 +6,7 @@ import "./login.css";
 
 const Login = (): JSX.Element => {
   return (
-    <div className="flex-container">
+    <div className="flex">
       <LoginForm />
       <p>@ 2021 EduEdu, todos os direitos reservados</p>
     </div>
