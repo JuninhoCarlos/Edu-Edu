@@ -1,60 +1,56 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import { AppThunk, RootState } from '../app/store';
-import { Login } from "../components/login/LoginForm"
+import { Login } from "../components/login/LoginForm";
 
-interface AuthState{
-    isLogged: boolean,
-    user: any | undefined
+interface AuthState {
+  isLogged: boolean;
+  user: any | undefined;
 }
 const initialState: AuthState = {
-    isLogged: false,
-    user: undefined
-}
+  isLogged: false,
+  user: undefined,
+};
 
-export const login = createAsyncThunk(
-  'auth/login',
-  async (user: Login) => {
-    let result: any; 
-    await firebase.auth().signInWithEmailAndPassword(user.email, user.password)
-      .then((data) => {
-        console.log(data)
-        result = data.user!.email;
-      })
-      .catch((error) => {        
-        return Promise.reject("Credenciais incorretas");
-      });
+export const login = createAsyncThunk("auth/login", async (user: Login) => {
+  let result: any;
+  await firebase
+    .auth()
+    .signInWithEmailAndPassword(user.email, user.password)
+    .then((data) => {
+      console.log(data);
+      result = data.user!.email;
+    })
+    .catch((error) => {
+      return Promise.reject("Credenciais incorretas");
+    });
 
-    return result;
-  }
-);
+  return result;
+});
 
 export const authSlice = createSlice({
-    name: "auth",
-    initialState,
-    reducers: {
-        /*
+  name: "auth",
+  initialState,
+  reducers: {
+    /*
         incrementByAmount: (state, action: PayloadAction<number>) => {
           state.value += action.payload;
         }*/
-    },
-    extraReducers: builder => {
-        builder.addCase(login.fulfilled, (state, action) => {
-          state.isLogged = true; 
-          console.log("o payload e", action.payload);
-          state.user = action.payload;         
-          //Tem que ver o precisa na request para salvar o necessario do objeto
-          
-        });
+  },
+  extraReducers: (builder) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.isLogged = true;
+      console.log("o payload e", action.payload);
+      state.user = action.payload;
+      //Tem que ver o precisa na request para salvar o necessario do objeto
+    });
 
-        builder.addCase(login.rejected, (state, action) => {
-          state.isLogged = false; 
-          state.user = undefined;         
-        });
-
-      }
+    builder.addCase(login.rejected, (state, action) => {
+      state.isLogged = false;
+      state.user = undefined;
+    });
+  },
 });
 
 export default authSlice.reducer;
