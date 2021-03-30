@@ -76,7 +76,7 @@ const LoginForm = (): JSX.Element => {
       )}
       <Form
         onSubmit={onSubmit}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
+        render={({ handleSubmit }) => (
           <form className="form" onSubmit={handleSubmit}>
             <div className="form-group relative">
               <Field
