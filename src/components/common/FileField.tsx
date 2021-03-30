@@ -28,6 +28,7 @@ const FileField = ({ name, ...props }: Props) => {
                         onChange={({ target }) => {
                             const url = URL.createObjectURL(target.files![0]);
                             if (url) setAvatar(url);
+                            onChange(target.files);
                         }}
                         {...props}
                     />
