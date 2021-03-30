@@ -27,11 +27,7 @@ const FileField = ({ name, ...props }: Props) => {
                         type="file"
                         onChange={({ target }) => {
                             const url = URL.createObjectURL(target.files![0]);
-                            setAvatar(url);
-                        }} // instead of the default target.value
-                        onLoad={({ target }) => {
-                            console.log("loaded");
-                            console.log(target);
+                            if (url) setAvatar(url);
                         }}
                         {...props}
                     />
