@@ -10,6 +10,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 const FileField = ({ name, ...props }: Props) => {
     const [avatar, setAvatar] = useState<string>(srGoiaba);
+
     return (
         <Field<FileList> name={name}>
             {({ input: { value, onChange, ...input } }) => (

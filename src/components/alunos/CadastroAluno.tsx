@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/firebase-storage";
 
-import { uploadAvatar, addAluno } from "../../reducers/alunosReducer";
+import { addAluno } from "../../reducers/alunosReducer";
 import { useAppDispatch } from "../../app/store";
 
 import "./style.css";
@@ -15,6 +15,8 @@ import hatIcon from "../../assets/icons/icon_hat.png";
 import required from "../common/validators";
 import FileField from "../common/FileField";
 import InputField from "../common/InputField";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useHistory } from "react-router-dom";
 //import { unwrapResult } from "@reduxjs/toolkit";
 
 interface Errors {
@@ -31,8 +33,9 @@ interface Cadastro {
 
 const CadastroAluno = (): JSX.Element => {
     const dispatch = useAppDispatch();
+    const history = useHistory();
 
-    const onSubmit = (values: Cadastro) => {
+    const onSubmit = async (values: Cadastro) => {
         console.log("mandando", values);
 
         dispatch(
@@ -40,14 +43,16 @@ const CadastroAluno = (): JSX.Element => {
                 nome: values.nome,
                 escola: values.escola,
                 serie: values.serie,
-                avatar: values.avatar![0],
+                avatar: values.avatar ? values.avatar[0] : undefined,
             })
-        ); /*
+        )
             .then(unwrapResult)
             .then((data) => {
-                console.log("Deu certo", data);
+                history.replace("/dashboard");
             })
-            .catch((err) => {});*/
+            .catch((err) => {
+                console.log("Error ao cadastrar", err);
+            });
 
         const storageRef = firebase.storage().ref();
         const imgRef = storageRef.child("images");
@@ -88,6 +93,7 @@ const CadastroAluno = (): JSX.Element => {
         //console.log(spaceRef.fullPath);
         // Create a storage reference from our storage service
         //var storageRef = storage.ref();
+        console.log("saindo do submit");
     };
 
     return (

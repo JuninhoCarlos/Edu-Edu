@@ -7,7 +7,7 @@ import "firebase/firebase-storage";
 interface Aluno {
     nome: string;
     escola: string;
-    avatar: File;
+    avatar?: File;
     serie: number;
 }
 
@@ -51,9 +51,14 @@ export const addAluno = createAsyncThunk(
                 escola: aluno.escola,
             })
             .then((docRef) => {
-                dispatch(
-                    uploadAvatar({ fileName: docRef.id, file: aluno.avatar })
-                );
+                if (aluno.avatar) {
+                    dispatch(
+                        uploadAvatar({
+                            fileName: docRef.id,
+                            file: aluno.avatar,
+                        })
+                    );
+                }
                 return docRef.id;
             })
             .catch((error) => {
