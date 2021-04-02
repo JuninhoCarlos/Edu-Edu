@@ -1,10 +1,14 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/firebase-storage";
+import { act } from "react-dom/test-utils";
+
+import { RootState } from "../app/store";
 
 interface Aluno {
+    id?: string;
     nome: string;
     escola: string;
     avatar?: File;
@@ -37,12 +41,23 @@ export const uploadAvatar = createAsyncThunk(
     }
 );
 
+export const getAlunos = createAsyncThunk("alunos/getAlunos", async () => {
+    const snapshot = await firebase
+        .firestore()
+        .collection("alunos")
+        .orderBy("serie")
+        .get();
+
+    return snapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+    }) as Array<Aluno>;
+});
+
 export const addAluno = createAsyncThunk(
     "alunos/addAluno",
     async (aluno: Aluno, { dispatch }) => {
         const db = firebase.firestore();
 
-        console.log("sending add to firebase");
         await db
             .collection("alunos")
             .add({
@@ -64,7 +79,6 @@ export const addAluno = createAsyncThunk(
             .catch((error) => {
                 return Promise.reject(error);
             });
-        console.log("saindo do thunk");
     }
 );
 
@@ -87,7 +101,31 @@ const alunosReducer = createSlice({
             console.log("rejected addAluno");
             console.log(action.error);
         });
+        builder.addCase(getAlunos.fulfilled, (state, action) => {
+            state.alunos = action.payload;
+        });
+        builder.addCase(getAlunos.rejected, (state, action) => {
+            console.log(action.error);
+        });
     },
 });
+
+//selectors
+export const getSeries = (state: RootState) => {
+    const series: Array<number> = [];
+    state.alunos.alunos.forEach((aluno) => {
+        if (!series.find((serie) => serie === aluno.serie))
+            series.push(aluno.serie);
+    });
+    return series;
+};
+
+export const getAlunosBySerie = (state: RootState, serie: Number) =>
+    state.alunos.alunos.filter((aluno) => aluno.serie === serie);
+
+//const selectTodoById = (state, todoId) => {
+//        return state.todos.find(todo => todo.id === todoId)
+//   }
+//const todo = useSelector(state => selectTodoById(state, id))
 
 export default alunosReducer.reducer;

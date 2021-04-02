@@ -31,7 +31,7 @@ interface Cadastro {
     escola: string;
 }
 
-const CadastroAluno = (): JSX.Element => {
+const CadastroAluno = () => {
     const dispatch = useAppDispatch();
     const history = useHistory();
 
@@ -42,7 +42,7 @@ const CadastroAluno = (): JSX.Element => {
             addAluno({
                 nome: values.nome,
                 escola: values.escola,
-                serie: values.serie,
+                serie: Number(values.serie),
                 avatar: values.avatar ? values.avatar[0] : undefined,
             })
         )
