@@ -51,7 +51,7 @@ const LoginForm = (): JSX.Element => {
     };
 
     return (
-        <div className="container">
+        <div className="containerx">
             <img src={logo} alt="" />
             {loginError ? (
                 <div

@@ -18,12 +18,12 @@ const ListarAno = (props: ListarProps) => {
             {alunos.length === 0 ? (
                 ""
             ) : (
-                <div className="align-self-start w-100 mt-3">
+                <div className="container">
                     <p className="h2 m-0">
                         <strong>{props.ano}º Ano </strong>
                     </p>
                     <hr className="mt-0 mb-2"></hr>
-                    <div className="d-flex flew-row">
+                    <div className="row">
                         {alunos.map((element) => (
                             <Card
                                 ano={props.ano}

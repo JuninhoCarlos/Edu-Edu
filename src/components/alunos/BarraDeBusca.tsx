@@ -36,8 +36,8 @@ const BarraDeBusca = () => {
     }, [filtervalue, dispatch, filtrarPor.nome]);
 
     return (
-        <div className="py-2 my-3 align-self-center w-100 bg-white my-border my-radius">
-            <div className="d-flex flex-row justify-content-between align-items-center">
+        <div className="row py-2 my-3 align-self-center bg-white my-border my-radius">
+            <div className="col-12 d-flex flex-row justify-content-between align-items-center">
                 <div className="input-group input-group-lg w-25 ml-3 mt-2">
                     <input
                         type="text"

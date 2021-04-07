@@ -20,7 +20,7 @@ const ListarAluno = () => {
     }, [dispatch]);
 
     return (
-        <div className="d-flex flex-column align-items-center">
+        <div className="container-fluid">
             <BarraDeBusca />
             {status === "loading"
                 ? "Carregando"
