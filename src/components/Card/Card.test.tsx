@@ -22,3 +22,19 @@ describe("<Card />", () => {
     expect(avatar).toHaveAttribute("src");
   });
 });
+
+describe("<Card />", () => {
+  test("Should Display a Card with an specific url to the avatar", async () => {
+    const { findByTestId } = renderCard({
+      nome: "Thiago",
+      ano: 2,
+      avatarUrl: "avatar.png",
+    });
+    const nome = await findByTestId("nome");
+    expect(nome).toHaveTextContent("Thiago");
+    const ano = await findByTestId("ano");
+    expect(ano).toHaveTextContent("2º Ano");
+    const avatar = await findByTestId("avatarUrl");
+    expect(avatar).toHaveAttribute("src", "avatar.png");
+  });
+});
